@@ -34,10 +34,10 @@ return [
 
     'CakePimpleDi' => [
         'services' => [
-            'LibraryApp\Client' => function() {
+            'LibraryApp\Client' => function() {//each time you get that service, will returns the same instance
                 return new \Cake\Network\Http\Client;
             },
-            'LibraryApp\Finder' => function($c) {
+            'LibraryApp\Finder' => function($c) {//each time you get that service, will returns  the same instance
                 $finder = new \LibraryApp\Finder\SimpleFinder(
                 	$c['LibraryApp\Client']
                 );
@@ -48,7 +48,7 @@ return [
                 'value' => function () {
                     return rand();
                 },
-                'type' => 'parameter'
+                'type' => 'parameter'//when you get that service, will return the original closure
             ],
             'cookie_name' => 'SESSION_ID',
             [
@@ -58,7 +58,7 @@ return [
                     $std->rand = rand();
                     return $std;
                 },
-                'type' => 'factory'
+                'type' => 'factory'//will return  a different instance for all calls
             ]
         ]
     ]

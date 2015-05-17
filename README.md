@@ -38,8 +38,10 @@ return [
                 return new \Cake\Network\Http\Client;
             },
             'LibraryApp\Finder' => function($c) {
-                $finder = new \stdClass;
-                $finder->client = $c['LibraryApp\Client'];
+                $finder = new \LibraryApp\Finder\SimpleFinder(
+                	$c['LibraryApp\Client']
+                );
+
                 return $finder;
             },
             'random_func' => [

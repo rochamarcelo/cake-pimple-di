@@ -35,11 +35,9 @@ return [
     'CakePimpleDi' => [
         'services' => [
             'LibraryApp\Client' => function() {
-                var_dump('LibraryApp\Client');
                 return new \Cake\Network\Http\Client;
             },
             'LibraryApp\Finder' => function($c) {
-                var_dump('LibraryApp\Finder');
                 $finder = new \stdClass;
                 $finder->client = $c['LibraryApp\Client'];
                 return $finder;
@@ -91,3 +89,8 @@ class BooksController extends AppController
     }
 }
 ```
+
+## What is Pimple?
+
+Pimple is a simple PHP Dependency Injection Container, to more information visit: http://pimple.sensiolabs.org
+

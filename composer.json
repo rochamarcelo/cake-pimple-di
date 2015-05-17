@@ -25,7 +25,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"RochaMarcelo\\CakePimpleDi": "src"
+			"RochaMarcelo\\CakePimpleDi\\": "src"
 		}
 	},
 	"autoload-dev": {

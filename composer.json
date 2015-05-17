@@ -1,0 +1,36 @@
+{
+	"name": "rochamarcelo/cake-pimple-di",
+	"type": "cakephp-plugin",
+	"description": "A cakephp plugin for dependency injection based on Pimple library ",
+	"keywords": ["cakephp", "cake3", "plugin", "dependency", "injection", "pimple"],
+	"homepage": "https://github.com/rochamarcelo/cake-pimple-di",
+	"license": "MIT",
+	"support":{
+		"source":"https://github.com/rochamarcelo/cake-pimple-di",
+		"issues":"https://github.com/rochamarcelo/cake-pimple-di/issues"
+	},
+	"authors": [
+		{
+			"name": "Marcelo Rocha",
+			"email": "contato@omarcelo.com.br",
+			"homepage": "https://github.com/rochamarcelo"
+		}
+	],
+	"require": {
+		"php": ">=5.4.16"
+	},
+	"require-dev": {
+		"cakephp/cakephp": "~3.0",
+		"phpunit/phpunit": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"RochaMarcelo\\CakePimpleDi": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"RochaMarcelo\\CakePimpleDi\\Test\\": "tests"
+		}
+	}
+}

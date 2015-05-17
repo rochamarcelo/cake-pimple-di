@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=5.4.16",
-        "pimple/pimple": "~3.0",
+        "pimple/pimple": "~3.0"
     },
     "require-dev": {
         "cakephp/cakephp": "~3.0",

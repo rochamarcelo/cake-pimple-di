@@ -21,7 +21,7 @@ Load the plugin as any other plugin:
 Plugin::load('RochaMarcelo/CakePimpleDi', ['bootstrap' => true, 'routes' => false]);
 ```
 
-You must set option bootstrap to true to load all configurations needed
+The bootstrap file must be loaded, to set up all configurations needed
 
 ## Register dependencies
 

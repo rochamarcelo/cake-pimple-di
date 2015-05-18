@@ -31,7 +31,7 @@ class Di
      */
     public function __construct(Container $container = null)
     {
-        if ( $container === null ) {
+        if ($container === null) {
             $container = new Container;
         }
         $this->container = $container;
@@ -47,15 +47,15 @@ class Di
     public static function instance($name = null)
     {
         static $instance;
-        if ( $name === null ) {
+        if ($name === null) {
             $name = 'default';
         }
 
-        if ( !is_string($name) ) {
+        if (!is_string($name)) {
             throw new \InvalidArgumentException('$name must be a string value');
         }
 
-        if ( !isset($instance[$name]) ) {
+        if (!isset($instance[$name])) {
             $instance[$name] = new static();
         }
 
@@ -75,20 +75,20 @@ class Di
     /**
      * Sets a parameter or an object.
      *
-     *
-     * @param  string $id    The unique identifier for the parameter or object
-     * @param  mixed  $value The value of the parameter or a closure to define an object
-     * @param  string $type  The "service" type, factory, parameters or default
+     * @param string $id    The unique identifier for the parameter or object
+     * @param mixed  $value The value of the parameter or a closure to define an object
+     * @param string $type  The "service" type, factory, parameters or default
      *
      * @throws \RuntimeException Prevent override of a frozen service
+     * @return void
      */
     public function set($id, $value, $type = null)
     {
-        if ( $type === static::TYPE_PARAMETER && is_object($value) && method_exists($value, '__invoke') ) {
+        if ($type === static::TYPE_PARAMETER && is_object($value) && method_exists($value, '__invoke')) {
             $value = $this->container()->protect($value);
         }
 
-        if ( $type === static::TYPE_FACTORY ) {
+        if ($type === static::TYPE_FACTORY) {
             $value = $this->container[$id] = $this->container()->factory($value);
         }
 
@@ -99,27 +99,29 @@ class Di
     /**
      * Sets a parameter or an object.
      *
-     *
      * @param array $services List of services to set
      *
+     * @return void
      */
     public function setMany(array $services)
     {
         foreach ($services as $id => $service) {
-            if ( !is_array($service) ) {
+            if (!is_array($service)) {
                 $this->set($id, $service);
                 continue;
             }
 
-            if ( !isset($service['id']) ) {
+            if (!isset($service['id'])) {
                 $service['id'] = $id;
             }
-            if ( !array_key_exists('value', $service) ) {
-                throw new \InvalidArgumentException('Value for "' . $service['id'] . '" must be provided');
+            if (!array_key_exists('value', $service)) {
+                throw new \InvalidArgumentException(
+                    'Value for "' . $service['id'] . '" must be provided'
+                );
             }
 
             $type = null;
-            if ( isset($service['type']) ) {
+            if (isset($service['type'])) {
                 $type = $service['type'];
             }
             $this->set($service['id'], $service['value'], $type);

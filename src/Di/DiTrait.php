@@ -21,7 +21,7 @@ trait DiTrait
      */
     public function di()
     {
-        if ( $this->DiInstance === null ) {
+        if ($this->DiInstance === null) {
             $this->DiInstance = Di::instance();
         }
         return $this->DiInstance;

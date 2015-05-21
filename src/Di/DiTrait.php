@@ -3,7 +3,7 @@
 namespace RochaMarcelo\CakePimpleDi\Di;
 
 /**
- * Disponibiliza interface para Di (Injeção de dependencia)
+ * Provides an simple way to use the Di class
  */
 trait DiTrait
 {

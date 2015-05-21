@@ -5,7 +5,7 @@ namespace RochaMarcelo\CakePimpleDi\Di;
 use Pimple\Container;
 
 /**
- * Classe para injeção de dependencia, trabalha com a lib silexphp/Pimple
+ * Dependency injection based on silexphp/Pimple
  *
  * @author  Marcelo Rocha <contato@omarcelo.com.br>
  */
@@ -18,7 +18,7 @@ class Di
     const TYPE_DEFAULT = 'default';
 
     /**
-     * Container de dependencias
+     * Container
      *
      * @var Pimple\Container
      */
@@ -38,7 +38,7 @@ class Di
     }
 
     /**
-     * Obtem a instancia
+     * Get static instance of this class
      *
      * @param string $name Instance identifier name
      *

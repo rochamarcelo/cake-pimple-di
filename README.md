@@ -125,6 +125,25 @@ use RochaMarcelo\CakePimpleDi\Di\Di;
 $finder = Di::instance()->get('LibraryApp\Finder');
 ```
 
+## Using the DiTrait
+
+```php
+
+namespace App\Controller;
+
+use RochaMarcelo\CakePimpleDi\Di\DiTrait;
+
+class BooksController extends AppController
+{
+    use DiTrait;
+
+    public function index()
+    {
+        $finder = $this->di()->get('LibraryApp\Finder');
+    }
+}
+```
+
 ## Loading dependency - Injections with component
 In yout controller load the Di component defining the injections you want
 
@@ -157,25 +176,6 @@ class MyControllerController extends AppController
     {
         $finder->find();
         $something->doSomething();
-    }
-}
-```
-
-## Using the DiTrait
-
-```php
-
-namespace App\Controller;
-
-use RochaMarcelo\CakePimpleDi\Di\DiTrait;
-
-class BooksController extends AppController
-{
-	use DiTrait;
-
-    public function index()
-    {
-        $finder = $this->di()->get('LibraryApp\Finder');
     }
 }
 ```

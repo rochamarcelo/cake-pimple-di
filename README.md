@@ -112,17 +112,7 @@ return [
                     return rand();
                 },
                 'type' => 'parameter'//when you get that service, will return the original closure
-            ],
-            'cookie_name' => 'SESSION_ID',
-            [
-                'id' => 'something',
-                'value' => function () {
-                    $std = new \stdClass;
-                    $std->rand = rand();
-                    return $std;
-                },
-                'type' => 'factory'//will return  a different instance for all calls
-            ]
+            ] 
         ]
     ]
 ];

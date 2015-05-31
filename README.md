@@ -125,7 +125,7 @@ use RochaMarcelo\CakePimpleDi\Di\Di;
 $finder = Di::instance()->get('LibraryApp\Finder');
 ```
 
-## Using the DiTrait
+## Loading dependency - With DiTrait
 
 ```php
 

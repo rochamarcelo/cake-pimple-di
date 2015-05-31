@@ -17,15 +17,15 @@ foreach ( $scopes as $name => $config ) {
         'providers' => []
     ];
 
-    if ( isset($config['services']) && is_array($config['services']) ) {
-        $Di->setMany($config['services']);
-    }
-
     foreach ($config['providers'] as $provider ) {
         if ( is_string($provider) ) {
             $provider = new $provider;
         }
 
         $Di->register($provider);
+    }
+
+    if ( isset($config['services']) && is_array($config['services']) ) {
+        $Di->setMany($config['services']);
     }
 }

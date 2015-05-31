@@ -96,7 +96,7 @@ class LibraryAppProvider implements ServiceProviderInterface
 ```
 - Then, define in your configuration file:
 
-``php
+```php
 <?php
 return [
     ...

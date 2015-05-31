@@ -1,8 +1,9 @@
 ## CakePimpleDi - Cake 3 Plugin
-A cakephp plugin for dependency injection based on Pimple library
+A cakephp plugin for dependency injection based on [Pimple 3](http://pimple.sensiolabs.org)
 
 ## Requirements
 * CakePHP 3.X
+* [Pimple 3](http://pimple.sensiolabs.org)
 
 # Installation
 ---------

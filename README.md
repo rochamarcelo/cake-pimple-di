@@ -65,6 +65,67 @@ return [
 ];
 ```
 
+You could also create a provider to reuse some services that you may use in other projects.
+
+- So create the provider that implements Pimple\ServiceProviderInterface:
+```php
+<?php
+namespace App\Di;
+
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
+
+class LibraryAppProvider implements ServiceProviderInterface
+{
+
+    public function register(Container $pimple)
+    {
+
+        $pimple['LibraryApp\Client'] = function() {//each time you get that service, will returns the same instance
+                return new \Cake\Network\Http\Client;
+        };
+
+        $pimple['LibraryApp\Finder'] = function($c) {//each time you get that service, will returns  the same instance
+            $finder = new \LibraryApp\Finder\SimpleFinder(
+                $c['LibraryApp\Client']
+            );
+            return $finder;
+        };
+    }
+}
+```
+- Then, define in your configuration file:
+
+``php
+<?php
+return [
+    ...
+
+    'CakePimpleDi' => [
+        'providers' => [
+            'App\Di\LibraryAppProvider'
+        ],
+        'services' => [
+            'random_func' => [
+                'value' => function () {
+                    return rand();
+                },
+                'type' => 'parameter'//when you get that service, will return the original closure
+            ],
+            'cookie_name' => 'SESSION_ID',
+            [
+                'id' => 'something',
+                'value' => function () {
+                    $std = new \stdClass;
+                    $std->rand = rand();
+                    return $std;
+                },
+                'type' => 'factory'//will return  a different instance for all calls
+            ]
+        ]
+    ]
+];
+```
 ## Loading dependency
 Get the shared instance then call method "get"
 

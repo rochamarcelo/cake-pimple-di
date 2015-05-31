@@ -112,17 +112,53 @@ return [
                     return rand();
                 },
                 'type' => 'parameter'//when you get that service, will return the original closure
-            ] 
+            ]
         ]
     ]
 ];
 ```
-## Loading dependency
+## Loading dependency - Basic
 Get the shared instance then call method "get"
 
 ```php
 use RochaMarcelo\CakePimpleDi\Di\Di;
 $finder = Di::instance()->get('LibraryApp\Finder');
+```
+
+## Loading dependency - Injections with component
+In yout controller load the Di component defining the injections you want
+
+```php
+class MyControllerController extends AppController
+{
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RochaMarcelo/CakePimpleDi.Di', [
+            'injections' => [
+                'view' => [//View action
+                    'MovieApp\Finder',//First argument
+                    'something'//Second argument
+                ],
+                'edit' => [//Edit action
+                    'MovieApp\Finder'//First argument
+                ]
+            ]
+        ]);
+    }
+
+    public function view(\CakeFinder $finder, $something, $id = null)
+    {
+        $finder->find();
+        .....
+    }
+
+    public function edit($finder, $id = null)
+    {
+        $finder->find();
+        $something->doSomething();
+    }
+}
 ```
 
 ## Using the DiTrait

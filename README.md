@@ -10,7 +10,7 @@ A cakephp plugin for dependency injection based on [Pimple 3](http://pimple.sens
 To install this plugin you'll only have to add the plugin to your required section of composer.json then load in your bootstrap file.
 
 ```
-composer require require rochamarcelo/cake-pimple-di
+composer require rochamarcelo/cake-pimple-di:dev-master
 ```
 
 # Bootstrap

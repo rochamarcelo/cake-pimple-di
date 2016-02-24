@@ -12,6 +12,8 @@ class DiComponent extends Component
 {
     use DiTrait;
 
+    private $originalPass;
+
     /**
      * Called before the controller action. Try to load dependencies
      *
@@ -19,7 +21,7 @@ class DiComponent extends Component
      *
      * @return null
      */
-    public function beforeFilter(Event $event)
+    public function startup(Event $event)
     {
         $controller = $this->_registry->getController();
         $request = $controller->request;
@@ -34,6 +36,27 @@ class DiComponent extends Component
         foreach ($injections[$action] as $dependency ) {
             $params[] = $this->di()->get($dependency);
         }
+        $this->originalPass = $request->params['pass'];
         $request->params['pass'] = array_merge($params, $request->params['pass']);
+    }
+
+    /**
+     * Before render callback.
+     *
+     * @param \Cake\Event\Event $event The beforeRender event.
+     *
+     * @return void
+     */
+    public function beforeRender(Event $event)
+    {
+        $controller = $this->_registry->getController();
+        $injections = $this->config('injections');
+        $action = $controller->request->params['action'];
+
+        if ( !isset($injections[$action]) ) {
+            return;
+        }
+
+        $controller->request->params['pass'] = $this->originalPass;
     }
 }

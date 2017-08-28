@@ -36,15 +36,14 @@ class Di
         }
         $this->container = $container;
     }
-
     /**
      * Get static instance of this class
      *
-     * @param string $name Instance identifier name
-     *
+     * @param string $name     Instance identifier name
+     * @param bool   $forceNew Should ignore old instance and force new one
      * @return Di
      */
-    public static function instance($name = null)
+    public static function instance($name = null, $forceNew = false)
     {
         static $instance;
         if ($name === null) {
@@ -55,7 +54,7 @@ class Di
             throw new \InvalidArgumentException('$name must be a string value');
         }
 
-        if (!isset($instance[$name])) {
+        if (!isset($instance[$name]) || $forceNew === true) {
             $instance[$name] = new static();
         }
 

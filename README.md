@@ -34,6 +34,12 @@ return [
     ...
 
     'CakePimpleDi' => [
+        'actionInjections' => [
+            '\App\Controller\BooksController' => [
+                'index' => ['LibraryApp\Finder'],//should be defined in services
+                'view' => ['LibraryApp\Finder', 'random_func']//should be defined in services
+            ]
+        ],
         'services' => [
             'LibraryApp\Client' => function() {//each time you get that service, will returns the same instance
                 return new \Cake\Network\Http\Client;
@@ -144,35 +150,58 @@ class BooksController extends AppController
 }
 ```
 
-## Loading dependency - Injections with component
-In yout controller load the Di component defining the injections you want
+## Loading dependency - Injections with InvokeActionTrait
+In your configuration file:
 
 ```php
+<?php
+return [
+    ...
+
+    'CakePimpleDi' => [
+        'actionInjections' => [
+            '\App\Controller\BooksController' => [
+                'index' => ['LibraryApp\Finder'],//should be defined in services
+                'view' => ['LibraryApp\Finder', 'random_func']//should be defined in services
+            ]
+        ],
+        'services' => [
+            'LibraryApp\Client' => function() {//each time you get that service, will returns the same instance
+                return new \Cake\Network\Http\Client;
+            },
+            'LibraryApp\Finder' => function($c) {//each time you get that service, will returns  the same instance
+                $finder = new \LibraryApp\Finder\SimpleFinder(
+                	$c['LibraryApp\Client']
+                );
+
+                return $finder;
+            },
+            'random_func' => [
+                'value' => function () {
+                    return rand();
+                },
+                'type' => 'parameter'//when you get that service, will return the original closure
+            ],          
+        ]
+    ]
+];
+
+In yout controller use the InvokeActionTrait
+
+```php
+
+use RochaMarcelo\CakePimpleDi\Di\InvokeActionTrait;
 class MyControllerController extends AppController
 {
-    public function initialize()
-    {
-        parent::initialize();
-        $this->loadComponent('RochaMarcelo/CakePimpleDi.Di', [
-            'injections' => [
-                'view' => [//View action
-                    'MovieApp\Finder',//First argument
-                    'something'//Second argument
-                ],
-                'edit' => [//Edit action
-                    'MovieApp\Finder'//First argument
-                ]
-            ]
-        ]);
-    }
+    use InvokeActionTrait;
 
-    public function view(\CakeFinder $finder, $something, $id = null)
+    public function view(\CakeFinder $finder, $rand, $id = null)
     {
         $finder->find();
         .....
     }
 
-    public function edit($finder, $id = null)
+    public function index($finder)
     {
         $finder->find();
         $something->doSomething();

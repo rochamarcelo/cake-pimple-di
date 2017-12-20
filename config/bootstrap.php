@@ -29,3 +29,6 @@ foreach ( $scopes as $name => $config ) {
         $Di->setMany($config['services']);
     }
 }
+if (!empty($config['actionInjections'])) {
+    \Cake\Event\EventManager::instance()->on(new \RochaMarcelo\CakePimpleDi\Event\ActionInjectionListener($config['actionInjections']));
+}

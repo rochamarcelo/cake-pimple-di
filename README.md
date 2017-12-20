@@ -185,6 +185,7 @@ return [
         ]
     ]
 ];
+```
 
 In yout controller use the InvokeActionTrait
 

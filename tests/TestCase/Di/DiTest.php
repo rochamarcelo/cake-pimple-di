@@ -167,7 +167,7 @@ class DiTest extends TestCase
                 'type' => 'factory'
             ]
         ];
-        $Di = $this->getMock('RochaMarcelo\CakePimpleDi\Di\Di', ['set']);
+        $Di = $this->getMockBuilder('RochaMarcelo\CakePimpleDi\Di\Di')->setMethods(['set'])->getMock();
 
         $Di->expects($this->at(0))
             ->method('set')

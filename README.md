@@ -187,7 +187,7 @@ return [
 ];
 ```
 
-In yout controller use the InvokeActionTrait
+In your controller use the InvokeActionTrait
 
 ```php
 
@@ -209,6 +209,9 @@ class MyControllerController extends AppController
     }
 }
 ```
+
+## Adding The CakePHP Request and Session Objects to The Container
+To get the Session and Request objects added to the container just set the key 'useRequest' with the value boolean true in the configuration. 
 
 ## What is Pimple?
 

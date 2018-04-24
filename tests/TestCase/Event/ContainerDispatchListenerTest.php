@@ -4,7 +4,7 @@ namespace RochaMarcelo\CakePimpleDi\Test\TestCase\Event;
 use Cake\Http\ActionDispatcher;
 use Cake\Http\Response;
 use Cake\Http\ServerRequest;
-use Cake\Network\Session;
+use Cake\Http\Session;
 use Cake\TestSuite\TestCase;
 use RochaMarcelo\CakePimpleDi\Di\DiTrait;
 use RochaMarcelo\CakePimpleDi\Event\ContainerDispatchListener;

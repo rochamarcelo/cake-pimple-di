@@ -25,7 +25,7 @@ trait InvokeActionTrait
      */
     public function invokeAction()
     {
-        $request = $this->request;
+        $request = $this->getRequest();
         if (!isset($request)) {
             throw new LogicException('No Request object configured. Cannot invoke action');
         }

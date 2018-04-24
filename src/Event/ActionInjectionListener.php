@@ -40,7 +40,7 @@ class ActionInjectionListener implements EventListenerInterface
     public function injectDependency(Event $event, array $actionArgs)
     {
         $className = '\\' . get_class($event->getSubject());
-        $action = $event->getSubject()->request->getParam('action');
+        $action = $event->getSubject()->getRequest()->getParam('action');
 
         if (isset($this->injectionsMap[$className][$action])) {
             $args = [];

@@ -24,9 +24,9 @@ class DiComponent extends Component
     public function startup(Event $event)
     {
         $controller = $this->_registry->getController();
-        $request = $controller->request;
-        $injections = $this->config('injections');
-        $action = $request->params['action'];
+        $request = $controller->getRequest();
+        $injections = $this->getConfig('injections');
+        $action = $request->getParam('action');
 
         if ( !isset($injections[$action]) ) {
             return;
@@ -36,8 +36,9 @@ class DiComponent extends Component
         foreach ($injections[$action] as $dependency ) {
             $params[] = $this->di()->get($dependency);
         }
-        $this->originalPass = $request->params['pass'];
-        $request->params['pass'] = array_merge($params, $request->params['pass']);
+        $this->originalPass = $request->getParam('pass');
+        $pass = array_merge($params, $request->getParam('pass'));
+        $controller->setRequest($controller->getRequest()->withParam('pass', $pass));
     }
 
     /**
@@ -50,13 +51,13 @@ class DiComponent extends Component
     public function beforeRender(Event $event)
     {
         $controller = $this->_registry->getController();
-        $injections = $this->config('injections');
-        $action = $controller->request->params['action'];
+        $injections = $this->getConfig('injections');
+        $action = $controller->getRequest()->getParam('action');
 
         if ( !isset($injections[$action]) ) {
             return;
         }
 
-        $controller->request->params['pass'] = $this->originalPass;
+        $controller->setRequest($controller->getRequest()->withParam('pass', $this->originalPass));
     }
 }

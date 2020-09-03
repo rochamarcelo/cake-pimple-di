@@ -21,7 +21,7 @@ class ContainerDispatchListenerTest extends TestCase
      * Test that the ContainerDispatchEventListener add the request and session objects to the container.
      * @return void
      */
-    public function testBeforeDispatchAddsRequestAndSession()
+    public function testControllerStartAddsRequestAndSession()
     {
         $response = new Response();
         $dispatcher = new ActionDispatcher();

@@ -17,10 +17,10 @@ class ContainerDispatchListener implements EventListenerInterface
     /**
      * @return array
      */
-    public function implementedEvents()
+    public function implementedEvents(): array
     {
         return [
-            'Dispatcher.beforeDispatch' => 'containerizeRequest',
+            'Controller.initialize' => 'containerizeRequest',
         ];
     }
 

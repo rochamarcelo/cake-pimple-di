@@ -18,11 +18,11 @@
     ],
     "require": {
         "php": ">=5.4.16",
-        "pimple/pimple": "~3.0"
+        "pimple/pimple": "~3.0",
+        "phpunit/phpunit": "^8.0"
     },
     "require-dev": {
-        "cakephp/cakephp": "~3.0",
-        "phpunit/phpunit": "^5.7.14|^6.0"
+        "cakephp/cakephp": "~4.0"
     },
     "autoload": {
         "psr-4": {

@@ -55,10 +55,5 @@ class Plugin extends BasePlugin
         if (!empty($config['actionInjections'])) {
             \Cake\Event\EventManager::instance()->on(new \RochaMarcelo\CakePimpleDi\Event\ActionInjectionListener($config['actionInjections']));
         }
-
-        if (isset($config['useRequest']) && $config['useRequest']) {
-            \Cake\Event\EventManager::instance()->on(new \RochaMarcelo\CakePimpleDi\Event\ContainerDispatchListener());
-        }
-
     }
 }

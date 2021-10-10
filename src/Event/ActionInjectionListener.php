@@ -22,10 +22,10 @@ class ActionInjectionListener implements EventListenerInterface
      *
      * @return array
      */
-    public function implementedEvents()
+    public function implementedEvents(): array
     {
         return [
-            'Controller.beforeCallAction' => 'injectDependency',
+            'Controller.startup' => 'injectDependency',
         ];
     }
 

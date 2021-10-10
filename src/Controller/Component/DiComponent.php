@@ -21,7 +21,7 @@ class DiComponent extends Component
      *
      * @return null
      */
-    public function startup(Event $event)
+    public function startup(\Cake\Event\EventInterface $event)
     {
         $controller = $this->_registry->getController();
         $request = $controller->getRequest();
@@ -48,7 +48,7 @@ class DiComponent extends Component
      *
      * @return void
      */
-    public function beforeRender(Event $event)
+    public function beforeRender(\Cake\Event\EventInterface $event)
     {
         $controller = $this->_registry->getController();
         $injections = $this->getConfig('injections');
